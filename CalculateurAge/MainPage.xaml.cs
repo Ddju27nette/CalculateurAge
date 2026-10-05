@@ -1,4 +1,6 @@
-﻿namespace CalculateurAge;
+﻿using CalculateurAge.Views;
+
+namespace CalculateurAge;
 
 public partial class MainPage : ContentPage
 {
@@ -7,12 +9,12 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
-    private void OnCalculerClicked(object sender, EventArgs e)
+    private async void OnCalculerClicked(object sender, EventArgs e)
     {
-        // 1. Validation : nom non vide
+        // 1. Validation : vérifier que le champ nom n'est pas vide
         if (string.IsNullOrWhiteSpace(entryNom.Text))
         {
-            DisplayAlert("Erreur", "Entrez un nom", "OK");
+            await DisplayAlert("Erreur", "Entrez un nom", "OK");
             return;
         }
 
@@ -24,8 +26,7 @@ public partial class MainPage : ContentPage
             age--;
         }
 
-        // 3. Modification directe des contrôles de l'interface
-        lblResultat.Text = $"{entryNom.Text}, vous avez {age} ans";
-        lblResultat.IsVisible = true;
+        // 3. Navigation vers ResultatPage avec passage des données par l'URL
+        await Shell.Current.GoToAsync($"{nameof(ResultatPage)}?nom={entryNom.Text}&age={age}");
     }
 }
