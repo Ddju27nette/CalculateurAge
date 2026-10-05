@@ -2,19 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalculateurAge.MainPage"
-             Title="Calculateur">
+             Title="Calculateur d'âge">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="12">
-            <Label Text="Nom" FontSize="16" />
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Nom" FontSize="16" FontAttributes="Bold" />
             <Entry Text="{Binding Nom, Mode=TwoWay}" Placeholder="Votre nom" />
 
-            <Label Text="Date de naissance" FontSize="16" />
+            <Label Text="Date de naissance" FontSize="16" FontAttributes="Bold" />
             <DatePicker Date="{Binding DateNaissance}" />
 
-            <Button Text="Calculer" Command="{Binding CalculerCommand}" />
+            <Button Text="Calculer" 
+                    Command="{Binding CalculerCommand}" />
 
-            <Label Text="{Binding Resultat}" FontSize="20" IsVisible="{Binding ResultatVisible}" />
+            <Button Text="Effacer" 
+                    Command="{Binding EffacerCommand}" 
+                    BackgroundColor="#C0392B" 
+                    TextColor="White" />
+
+            <Border Stroke="#BDC3C7" StrokeThickness="1" Padding="15" Margin="0,10,0,0"
+                    IsVisible="{Binding ResultatVisible}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{Binding Resultat}" FontSize="18" FontAttributes="Bold" TextColor="#2C3E50" />
+                    <Label Text="{Binding Statut}" FontSize="16" TextColor="#16A085" />
+                    <Label Text="{Binding JoursRestants}" FontSize="14" TextColor="#7F8C8D" />
+                </VerticalStackLayout>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 
